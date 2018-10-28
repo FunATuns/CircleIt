@@ -1,0 +1,30 @@
+{
+    "nothing": {
+        "name": "Nothing",
+        "id": "",
+        "type": "",
+        "maxstack": 0,
+        "stack": 0
+    },
+    "woodsword": {
+        "name": "Wood Sword",
+        "id": "woodsword",
+        "type": "weapon",
+        "maxstack": 1,
+        "stack": 1
+    },
+    "woodtool": {
+        "name": "Wood Tool",
+        "id": "woodtool",
+        "type": "tool",
+        "maxstack": 1,
+        "stack": 1
+    },
+    "woodnecklace": {
+        "name": "Wood Necklace",
+        "id": "woodnecklace",
+        "type": "misc",
+        "maxstack": 1,
+        "stack": 1
+    }
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>...</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+</head>
+<body  oncontextmenu="return false;">
+  <div id="nameOverlay" >
+    <input id="name" type="text"><button id="go">Go</button>
+  </div>
+
+  <section id="myplayerstats">
+    <div id="myplayercharge"><span id="chargebackbar"></span></div>
+    <div id="myplayerhealth"><span id="healthbackbar"></span></div>
+    <div id="myplayerexp"><span id="expbackbar"></span></div>
+    <div id="myplayerinv"> 
+      <div id="myplayerweapon" class="invbox"><span class="invtooltip">Weapon Slot</span></div>
+      <div id="myplayermisc" class="invbox"><span class="invtooltip">Misc Slot</span></div>
+      <div id="myplayertool" class="invbox"><span class="invtooltip">Tool Slot</span> </div>
+      <div id="myplayerarmor" class="invbox"><span class="invtooltip">Armor Slot</span></div>
+
+      <div id="inv0" class="inv invbox"><span class="invtooltip">Inventory 1 Slot</span></div>
+      <div id="inv1" class="inv invbox"><span class="invtooltip">Inventory 2 Slot</span></div>
+      <div id="inv2" class="inv invbox"><span class="invtooltip">Inventory 3 Slot</span></div>
+      <div id="inv3" class="inv invbox"><span class="invtooltip">Inventory 4 Slot</span></div>
+      <div id="inv4" class="inv invbox"><span class="invtooltip">Inventory 5 Slot</span></div>
+      <div id="inv5" class="inv invbox"><span class="invtooltip">Inventory 6 Slot</span></div>
+      <div id="inv6" class="inv invbox"><span class="invtooltip">Inventory 7 Slot</span></div>
+      <div id="inv7" class="inv invbox"><span class="invtooltip">Inventory 8 Slot</span></div>
+    </div>
+  </section>
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <scirpt src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.js"></script>
+  <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

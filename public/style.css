@@ -1,0 +1,108 @@
+body {
+    overflow:hidden;
+    margin:0;
+    padding:0;
+}
+
+#nameOverlay {
+    display: block;
+    width: 100%;
+    height: 100vh;
+    z-index: 999;
+}
+
+#myplayerstats {
+    float: left;
+    z-index: 999;
+    background: transparent;
+    position: absolute;
+    margin: 40px 50px;
+}
+
+#myplayercharge {
+    display: block;
+    width: 150px;
+    height: 20px;
+    border: 3px solid white;
+}
+
+#chargebackbar {
+    display: block;
+    width: 0px;
+    height: 100%;
+    background-color: blue;
+}
+
+#myplayerhealth {
+    display: block;
+    width: 150px;
+    height: 20px;
+    border: 3px solid white;
+
+    border-top-style: none;
+}
+
+#healthbackbar {
+    display: block;
+    width: 0px;
+    height: 100%;
+    background-color: red;
+}
+
+#myplayerexp {
+    display: block;
+    width: 150px;
+    height: 20px;
+    border: 3px solid white;
+
+    border-top-style: none;
+}
+
+#expbackbar {
+    display: block;
+    width: 0px;
+    height: 100%;
+    background-color: green;
+}
+
+#myplayerinv {
+    margin-top: 30px;
+}
+
+#inv0 {
+    margin-top: 30px;
+}
+
+.invbox {
+    display: block;
+    background-color: black;
+    width: 40px;
+    height: 40px;
+    border: 2px solid white;
+    position: relative;
+    background-size:cover;
+}
+
+.invselected {
+    border: 2px solid grey;
+}
+
+.invbox .invtooltip {
+    visibility: hidden;
+    width: 120px;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    left: 110%;
+}
+
+.invbox:hover .invtooltip {
+    visibility: visible;
+}
+
+
