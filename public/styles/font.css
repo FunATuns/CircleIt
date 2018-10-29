@@ -1,0 +1,28 @@
+@font-face {
+  font-family: "Helvetica Bold";
+  src: url("../font/HelveticaBlkIt.ttf");
+  font-style: normal;
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Helvetica Italic";
+  src: url("../font/HelveticaNeueItalic.ttf");
+  font-style: italic;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Helvetica";
+  src: url("../font/HelveticaNeueMedium.ttf");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Helvetica Light";
+  src: url("../font/HelveticaNeueLight.ttf");
+  font-style: normal;
+  font-weight: 200;
+}
+

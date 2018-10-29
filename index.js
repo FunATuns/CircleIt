@@ -59,6 +59,10 @@ io.on('connection', function (socket) {
     noo.move = data;
   });
 
+  socket.on("TextMsg", function(name, msg){
+    io.emit("PostMsg", name, msg);
+  });
+
   socket.on('InvSwitch', function (slot1,slot2) {
     var invPlayer = getPlayerById(socket.id);
     if(invPlayer) {

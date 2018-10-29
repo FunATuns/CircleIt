@@ -2,13 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>...</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Sucky Fucky</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="styles/font.css">
+  <link rel="stylesheet" type="text/css" href="styles/style.css">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
 </head>
 <body  oncontextmenu="return false;">
   <div id="nameOverlay" >
-    <input id="name" type="text"><button id="go">Go</button>
+    <h1>Suck my penis</h1>
+    <div id="inpcnt"><input id="name" type="text" placeholder="Username"></div>
+    <button id="go">Go</button>-->
   </div>
 
   <section id="myplayerstats">
@@ -31,10 +35,45 @@
       <div id="inv7" class="inv invbox"><span class="invtooltip">Inventory 8 Slot</span></div>
     </div>
   </section>
+  <section id="help">
+    <i id="helpcrc" class="fa fa-question-circle" aria-hidden="true" onclick="toggleHelp();"></i>
+    <section id="helpcnt">
+      <div class="helppiece">
+          <h1>Objective</h1>
+          <p>lmao this is what the game is actually supposed to do, have fun with this tbh.
+            also pls suck my peen
+          </p>
+      </div>
+      <div class="helppiece">
+          <h1>Controls</h1>
+          <p>lmao this is what the contols are in the game also pls suck my peen
+          </p>
+      </div>
+      <div class="helppiece">
+          <h1>Factions</h1>
+          <p>lmao this is what how all the factions work n shit also pls suck my peen
+          </p>
+      </div>
+    </section>
+    <div id="hlpoverlay" onclick="toggleHelp();"></div>
+  </section>
+  <section id="inchat">
+    <div id="chat"></div>
+    <div id="chtinpcnt">
+      <input type="text" placeholder="Type a message..." id="textmes"><!--
+      --><button id="sendtxt" onclick="sendtxt();">Send</button>
+    </div>
+  </section>
+  <!--<div id="mydiv">
+    <div id="mydivheader">Click here to move</div>
+    <p>Move</p>
+    <p>this</p>
+    <p>DIV</p>
+  </div>-->
   <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.js"></script>
   <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-  <script src="main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
