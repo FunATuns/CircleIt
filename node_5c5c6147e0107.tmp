@@ -67,6 +67,21 @@ io.on('connection', function (socket) {
     }
   });
 
+  socket.on('InvEquip', function (slot) {
+    var invPlayer = getPlayerById(socket.id);
+    if(invPlayer) {
+      if(invPlayer.inventory.inv[slot].id != "" ) {
+        if(invPlayer.inventory.inv[slot].type == "weapon" || invPlayer.inventory.inv[slot].type == "misc" || invPlayer.inventory.inv[slot].type == "armor" || invPlayer.inventory.inv[slot].type == "tool") {
+          var theType = invPlayer.inventory.inv[slot].type;
+          var hold = invPlayer.inventory.inv[slot];
+          invPlayer.inventory.inv[slot] = invPlayer.inventory[theType];
+          invPlayer.inventory[theType] = hold;
+        }
+      }
+      socket.emit("InvUpdate", invPlayer.inventory);
+    }
+  });
+
   socket.on('InvDrop', function (slot) {
     var invPlayer = getPlayerById(socket.id);
     if(invPlayer) {
@@ -106,7 +121,7 @@ function newplayer (id,name) {
       misc: items.woodnecklace,
       tool: items.woodtool,
       armor: items.nothing,
-      inv:  [items.nothing,items.nothing,items.woodsword,items.nothing,items.nothing,items.nothing,items.nothing,items.nothing]
+      inv:  [items.nothing,items.stonesword,items.woodsword,items.nothing,items.nothing,items.nothing,items.nothing,items.nothing]
     },
     stats: {
       speed: .5,
@@ -483,6 +498,7 @@ function getBuildingAtLocation(x,y) {
       return buildings[i];
     }
   }
+  return {};
 }
 
 function mineBuilding(player,building) {
@@ -522,6 +538,26 @@ function buildBuilding(x, y) {
   io.emit('Buildings', buildings);
 }
 
+function placeMountain(x, y, name) {
+  var currentBuilding = getBuildingAtLocation(x,y);
+  destroyBuilding(currentBuilding);
+
+  var building =  {
+    x: x,
+    y: y,
+    cid: keyGen(),
+    name: name,
+    health: 10,
+    maxHealth: 10,
+    team: 255,
+    collidable: true,
+    needsTick: true,
+  }
+
+  buildings.push(building);
+   io.emit('Buildings', buildings);
+}
+
 function createTree(x, y) {
   console.log(keyGen());
   var building =  {
@@ -547,7 +583,7 @@ function getDistance(x1,y1, x2,y2) {
 
 function buildWorld ()  {
   generateTrees();
-  //generateExp();
+  generateMountains();
 }
 
 var MAXTREES = 300;
@@ -602,7 +638,7 @@ function dropItem(id, amount, x, y) {
   var obj = {
     x: x,
     y: y,
-    r: 10,
+    r: 12,
     lifetime: 30*30,
     itemType: id,
     amount: amount,
@@ -621,6 +657,31 @@ function generateTrees() {
 
     if(!getBuildingAtLocation(x,y)) {
       createTree(x,y);
+    }
+  }
+}
+
+var maxMountains = 5;
+var mountainCenters = [];
+
+function generateMountains() {
+  for( var i = 0; i < maxMountains; i++) {
+    mountainCenters.push({x:getRandomInt(0,gwidth),y: getRandomInt(0, gheight)});
+  }
+  console.log(mountainCenters);
+
+  for(var i = 0; i < gwidth/32; i++) {
+    for(var j = 0; j < gheight/32; j++) {
+      var theX = (i*32) + 16;
+      var theY = (j*32) + 16;
+      for(var o = 0; o < mountainCenters.length; o++) {
+        if(getDistance(theX,theY, mountainCenters[o].x, mountainCenters[o].y) < 80 ){
+          placeMountain(i,j,"mountaincenter");
+        }
+        else if (getDistance(theX,theY, mountainCenters[o].x, mountainCenters[o].y) < 700 ){
+          placeMountain(i,j,"rock");
+        }
+      }
     }
   }
 }
@@ -698,6 +759,9 @@ function destroyObject (obj) {
 }
 
 function destroyBuilding (building) {
+  if(!building) {
+    return;
+  }
   for (i = 0; i < buildings.length; i++) {
     if(buildings[i].cid == building.cid) {
       buildings.splice(i, 1);

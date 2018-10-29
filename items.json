@@ -13,6 +13,13 @@
         "maxstack": 1,
         "stack": 1
     },
+    "stonesword": {
+        "name": "Stone Sword",
+        "id": "stonesword",
+        "type": "weapon",
+        "maxstack": 1,
+        "stack": 1
+    },
     "woodtool": {
         "name": "Wood Tool",
         "id": "woodtool",

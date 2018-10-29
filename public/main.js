@@ -116,13 +116,17 @@ $("#go").click(function (){
   document.getElementById("nameOverlay").style.display = "none";
 });
 
-var tree;
+var imgStore = {};
 function setup() {
   var canvas = createCanvas($(window).width(), $(window).height());
   fill(255);
   frameRate(60);
 
-   tree = loadImage("sprites/treeLarge.png"); 
+  imgStore.tree = loadImage("sprites/treeLarge.png"); 
+  imgStore.rock = loadImage("sprites/rockLarge.png"); 
+  imgStore.woodsword = loadImage("sprites/woodsword.png"); 
+  imgStore.stonesword = loadImage("sprites/stonesword.png"); 
+  imgStore.woodtool = loadImage("sprites/woodtool.png"); 
 }
 
 function draw() {
@@ -136,6 +140,29 @@ function draw() {
   line(offsetx + (4800 -myplayer.x),0,offsetx + (4800 -myplayer.x),offsety*2);
   line(0,offsety - myplayer.y,offsetx*2,offsety - myplayer.y);
   line(0,offsety + (4800 - myplayer.y),offsetx*2,offsety + (4800 - myplayer.y));
+
+  for(var o in objects) {
+    var realx = objects[o].x - myplayer.x + offsetx;
+    var realy = objects[o].y - myplayer.y + offsety;
+    drawThing(realx ,realy ,objects[o]);
+  }
+
+  for(var o in players) {
+    var realx = players[o].x - myplayer.x + offsetx;
+    var realy = players[o].y - myplayer.y + offsety;
+    drawThing(realx ,realy ,players[o]);
+  }
+
+  if(myplayer.slash) {
+    chargeanimbar.style.width = ((myplayer.slash.slashCharge / myplayer.slash.slashMax)*100) + "%";
+  }
+  if(myplayer.slash) {
+    healthanimbar.style.width = ((myplayer.stats.health / myplayer.stats.MaxHealth)*100) + "%";
+  }
+  if(myplayer.stats) {
+    expanimbar.style.width = ((myplayer.stats.exp / getExpMax(myplayer.stats.lvl))*100) + "%";
+  }
+
   if(myplayer) {
     drawPlayer(offsetx,offsety ,myplayer);
 
@@ -154,29 +181,7 @@ function draw() {
       
     }
   }
-    
-  for(var o in players) {
-    var realx = players[o].x - myplayer.x + offsetx;
-    var realy = players[o].y - myplayer.y + offsety;
-    drawThing(realx ,realy ,players[o]);
-  }
 
-  for(var o in objects) {
-    var realx = objects[o].x - myplayer.x + offsetx;
-    var realy = objects[o].y - myplayer.y + offsety;
-    drawThing(realx ,realy ,objects[o]);
-  }
-  
-  if(myplayer.slash) {
-    chargeanimbar.style.width = ((myplayer.slash.slashCharge / myplayer.slash.slashMax)*100) + "%";
-  }
-  if(myplayer.slash) {
-    healthanimbar.style.width = ((myplayer.stats.health / myplayer.stats.MaxHealth)*100) + "%";
-  }
-  if(myplayer.stats) {
-    expanimbar.style.width = ((myplayer.stats.exp / getExpMax(myplayer.stats.lvl))*100) + "%";
-  }
-    
   socket.emit('SendControls', move);
 }
 
@@ -225,12 +230,19 @@ function drawBuildings() {
 
 function renderBuilding (building, x, y) {
   if(building.name == "tree") {
-    stroke(85,255,85,255);
+    stroke(163,206,39,255);
     strokeWeight(2);
-    fill(85,255,85,40);
+    fill(163,206,39,40);
     rect(x,y,32,32);
-    image(tree,x , y + 2, 32, 32);
+    image(imgStore.tree,x , y + 2, 32, 32);
 
+  }
+  else if(building.name == "rock") {
+    stroke(157,157,157,255);
+    strokeWeight(2);
+    fill(157,157,157,40);
+    rect(x,y,32,32);
+    image(imgStore.rock,x , y + 2, 32, 32);
   }
   else if(building.name == "cannon") {
     stroke(255,255,255);
@@ -247,8 +259,10 @@ function drawThing(x,y,thing) {
 
 function drawObject(x,y,object) {
   if(object.name == "item") {
-    stroke(255);
+    stroke(255,255,255, 100);
+    strokeWeight(2);
     fill(255,255,255,20);
+    image(imgStore[object.itemType],x-9,y-9 , 18, 18);
     ellipse(x,y,object.r*2);
   }
   if(object.name == "exp") {
@@ -362,6 +376,13 @@ $(".invbox").click(function (event) {
       console.log("Switch " + num1 + "   " + num2);
       socket.emit("InvSwitch", num1, num2);
     }
+  }
+});
+
+$(".invbox").dblclick(function() {
+  if(this.id.startsWith("inv")) {
+    var num = Number(this.id.split("inv")[1]);
+    socket.emit("InvEquip", num);
   }
 });
 
