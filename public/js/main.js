@@ -439,8 +439,9 @@ function sendtxt(){
 socket.on("PostMsg", function(name, msg) {
   var d = new Date();
   var acthrs = 0;
+  var actmins = "0";
   var ttt = "AM";
-  if(d.getHours > 12){
+  if(d.getHours() > 12){
     acthrs = d.getHours() - 12;
     ttt = "PM";
   }
@@ -448,11 +449,18 @@ socket.on("PostMsg", function(name, msg) {
     acthrs = d.getHours();
     ttt = "AM";
   }
-  if(name == sessionStorage.getItem("username")){
-    document.getElementById("chat").innerHTML += "<p class='msg'><span class='myname'>" + acthrs + ":" + d.getMinutes() + ttt + " " + name + ": </span><span class='actmsg'>" + msg + "</span></p>";
+  if(d.getMinutes() < 10){
+    actmins = "0" + d.getMinutes();
   }
   else {
-    document.getElementById("chat").innerHTML += "<p class='msg'><span class='notmyname'>" + acthrs + ":" + d.getMinutes() + ttt + " " + name + ": </span><span class='actmsg'>" + msg + "</span></p>"
+    actmins = d.getMinutes();
+  }
+  console.log(actmins)
+  if(name == sessionStorage.getItem("username")){
+    document.getElementById("chat").innerHTML += "<p class='msg'><span class='myname'>" + acthrs + ":" + actmins + ttt + " " + name + ": </span><span class='actmsg'>" + msg + "</span></p>";
+  }
+  else {
+    document.getElementById("chat").innerHTML += "<p class='msg'><span class='notmyname'>" + acthrs + ":" + actmins + ttt + " " + name + ": </span><span class='actmsg'>" + msg + "</span></p>"
   }
   document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
 });
